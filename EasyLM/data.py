@@ -144,7 +144,7 @@ class HuggingfaceDataset(object):
     def get_default_config(updates=None):
         config = ConfigDict()
         config.path = 'c4'
-        config.name = 'en'
+        config.name = 'all'
         config.split = 'train'
         config.streaming = False
         config.seq_length = 1024
