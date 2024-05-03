@@ -4,7 +4,7 @@ export ZONE='us-central2-b'
 
 
 # Log per 128 * 50 steps, matching the gradient accumulation steps = Real 1 step
-gcloud compute tpus tpu-vm ssh beomi@$TPU_NAME --zone $ZONE --worker=all --command "
+gcloud compute tpus tpu-vm ssh @$TPU_NAME --zone $ZONE --worker=all --command "
 export LIBTPU_INIT_ARGS='--xla_jf_spmd_threshold_for_windowed_einsum_mib=0 --xla_tpu_spmd_threshold_for_allgather_cse=10000 --xla_enable_async_all_gather=true --xla_tpu_enable_latency_hiding_scheduler=true TPU_MEGACORE=MEGACORE_DENSE'
 
 python -m EasyLM.models.gemma.gemma_train \
