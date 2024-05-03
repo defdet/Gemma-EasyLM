@@ -1,5 +1,5 @@
 # seq len 2048
-export TPU_NAME='v4-32'
+export TPU_NAME='tpuvm-v1'
 export ZONE='us-central2-b'
 
 
