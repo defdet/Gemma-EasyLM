@@ -163,7 +163,7 @@ class HuggingfaceDataset(object):
         self._tokenizer = tokenizer
         self._text_processor = text_processor
         self._dataset = load_dataset(
-            self.config.path, name, split=split, streaming=self.config.streaming, domains='all', cache_dir='mnt_ds/cached_ds'
+            self.config.path, name, split=split, streaming=self.config.streaming, cache_dir='mnt_ds/cached_ds'
         )
 
     def __iter__(self):
