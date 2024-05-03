@@ -1,4 +1,4 @@
-# coding=utf-8
+819# coding=utf-8
 # Copyright 2024 The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -115,7 +115,7 @@ class GemmaConfig(PretrainedConfig):
         num_key_value_heads=16,
         head_dim=256,
         hidden_act="gelu",
-        max_position_embeddings=8192,
+        max_position_embeddings=4096,
         initializer_range=0.02,
         rms_norm_eps=1e-6,
         use_cache=True,
