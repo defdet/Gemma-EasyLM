@@ -30,4 +30,4 @@ python -m EasyLM.models.gemma.gemma_train \
 --checkpointer.save_optimizer_state=False \
 --checkpointer.float_dtype=bf16 \
 --logger.online=True \
---logger.output_dir=/gemma-checkpoint
+--logger.output_dir=/gemma-checkpoint"
