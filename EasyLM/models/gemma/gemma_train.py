@@ -58,6 +58,8 @@ FLAGS, FLAGS_DEF = mlxu.define_flags_with_default(
 
 
 def main(argv):
+    from huggingface_hub import HfApi, login
+    login('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')
     JaxDistributedConfig.initialize(FLAGS.jax_distributed)
     variant = mlxu.get_user_flags(FLAGS, FLAGS_DEF)
     flags_config_dict = mlxu.user_flags_to_config_dict(FLAGS, FLAGS_DEF)
