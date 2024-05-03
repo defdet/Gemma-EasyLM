@@ -37,7 +37,7 @@ class DatasetFactory(object):
         text_processor = TextProcessor(config.text_processor, tokenizer)
         if config.type == 'huggingface':
             return HuggingfaceDataset(
-                config.huggingface_dataset, tokenizer, text_processor, cache_dir='mnt_ds/cached_ds' **kwargs
+                config.huggingface_dataset, tokenizer, text_processor, cache_dir='mnt_ds/cached_ds', **kwargs
             )
         elif config.type == 'json':
             return JsonDataset(config.json_dataset, tokenizer, text_processor, **kwargs)
