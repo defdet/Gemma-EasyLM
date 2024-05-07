@@ -29,7 +29,7 @@ with mesh:
     params = tree_apply(shard_fns, param)
     # sharded_rng = next_rng()
 
-auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.float16) # HF Gemma
+auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
 auto_model.params = params['params']
 
 # 단일 파일로 로드해야 함
