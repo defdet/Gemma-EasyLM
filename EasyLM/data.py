@@ -162,7 +162,7 @@ class HuggingfaceDataset(object):
         split = self.config.split if self.config.split != '' else None
         self._tokenizer = tokenizer
         self._text_processor = text_processor
-        self._dataset = load_dataset('dichspace/darulm', split='train', cache_dir='../mnt_ds/cached_ds').select(range(100_000, 250_000))
+        self._dataset = load_dataset('dichspace/darulm', split='train', cache_dir='../mnt_ds/cached_ds').select(range(2_400_000, 7_900_000))
 
     def __iter__(self):
         chunk_size = self.config.batch_size * self.config.seq_length
