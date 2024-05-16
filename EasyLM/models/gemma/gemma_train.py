@@ -90,7 +90,7 @@ def main(argv):
     #     gemma_config = GemmaConfig(**FLAGS.gemma)
     gemma_config = GemmaConfig.from_pretrained("google/gemma-7b")
     gemma_config.update(
-         dict(max_position_embeddings=4096))
+         dict(max_position_embeddings=8192))
 
     # if FLAGS.update_gemma_config != "":
     #     gemma_config.update(dict(eval(FLAGS.update_gemma_config)))
