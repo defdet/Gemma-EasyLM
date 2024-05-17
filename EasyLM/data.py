@@ -162,8 +162,8 @@ class HuggingfaceDataset(object):
         split = self.config.split if self.config.split != '' else None
         self._tokenizer = tokenizer
         self._text_processor = text_processor
-        ds_culturax_eng = load_dataset("uonlp/CulturaX", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(200_000_000).remove_columns(["timestamp", "url", "source"])
-        ds_culturax_ru = load_dataset("uonlp/CulturaX", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(300_000_000).remove_columns(["timestamp", "url", "source"])
+        ds_culturax_eng = load_dataset("uonlp/CulturaX", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(500_000_000).remove_columns(["timestamp", "url", "source"])
+        ds_culturax_ru = load_dataset("uonlp/CulturaX", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(700_000_000).remove_columns(["timestamp", "url", "source"])
         rulm_ds = load_dataset('dichspace/darulm', split='train', cache_dir='../gemma_modeling/datasets', streaming=True).remove_columns(["domain"])
         ds = datasets.concatenate_datasets([ds_culturax_eng, ds_culturax_ru, rulm_ds]).shuffle(seed=42)
         self._dataset = ds
