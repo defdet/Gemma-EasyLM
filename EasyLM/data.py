@@ -162,10 +162,10 @@ class HuggingfaceDataset(object):
         split = self.config.split if self.config.split != '' else None
         self._tokenizer = tokenizer
         self._text_processor = text_processor
-        ds_culturax_eng = load_dataset("uonlp/CulturaX", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(500_000_000).remove_columns(["timestamp", "url", "source"])
-        ds_culturax_ru = load_dataset("uonlp/CulturaX", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).take(700_000_000).remove_columns(["timestamp", "url", "source"])
-        rulm_ds = load_dataset('dichspace/darulm', split='train', cache_dir='../gemma_modeling/datasets', streaming=True).remove_columns(["domain"])
-        ds = datasets.concatenate_datasets([ds_culturax_eng, ds_culturax_ru, rulm_ds]).shuffle(seed=42)
+        ds_culturax_eng = load_dataset("uonlp/CulturaX", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
+        ds_culturax_ru = load_dataset("uonlp/CulturaX", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
+        wiki = load_dataset("wikimedia/wikipedia", '20231101.ru', split='train', streaming=True, use_auth_token=True)
+        ds = datasets.interleave_datasets([ds_culturax_eng, ds_culturax_ru, wiki], probabilities=[0.33222591362, 0.66445182724, 0.00332225913])
         self._dataset = ds
 
     def __iter__(self):
