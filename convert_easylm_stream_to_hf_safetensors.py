@@ -13,26 +13,9 @@ _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::
 
 gemma_config = GemmaConfig.from_pretrained("google/gemma-2b")
 
-# EasyLM Gemma
-# model = FlaxGemmaForCausalLMModule(
-#     gemma_config, 
-#     dtype=get_float_dtype_by_name('bfloat16')
-# )
-
-model_ps = match_partition_rules(GemmaConfig.get_partition_rules(), param)
-shard_fns, _ = make_shard_and_gather_fns(
-    model_ps, get_float_dtype_by_name('bfloat16')
-)
-
-mesh = GemmaConfig.get_jax_mesh('1, 1, 1')
-with mesh:
-    params = tree_apply(shard_fns, param)
-    # sharded_rng = next_rng()
-
 auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
-auto_model.params = params['params']
+auto_model.params = param['params']
 
-# 단일 파일로 로드해야 함
 auto_model.save_pretrained('./gemma-interm-hf', max_shard_size='999GB')
 
 # HF Flax --> HF SafeTensors
