@@ -9,14 +9,16 @@ from EasyLM.jax_utils import get_float_dtype_by_name, match_partition_rules, mak
 from transformers import FlaxGemmaForCausalLM
 import jax.numpy as jnp
 import torch
-_, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
-
-gemma_config = GemmaConfig.from_pretrained("google/gemma-7b")
-
-auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
-auto_model.params = param['params']
-
-auto_model.save_pretrained('./gemma-interm-hf', max_shard_size='999GB')
+cpu_device = jax.devices('cpu')[0]
+    with jax.default_device(cpu_device):
+        _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
+        
+        gemma_config = GemmaConfig.from_pretrained("google/gemma-7b")
+        
+        auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
+        auto_model.params = param['params']
+        
+        auto_model.save_pretrained('./gemma-interm-hf', max_shard_size='999GB')
 
 # HF Flax --> HF SafeTensors
 import torch
