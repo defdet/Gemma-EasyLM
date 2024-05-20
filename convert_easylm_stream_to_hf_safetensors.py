@@ -9,7 +9,7 @@ from EasyLM.jax_utils import get_float_dtype_by_name, match_partition_rules, mak
 from transformers import FlaxGemmaForCausalLM
 import jax.numpy as jnp
 import torch
-_, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
+_, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'trainstate_params::{ckpt_path}')
 
 gemma_config = GemmaConfig.from_pretrained("google/gemma-2b")
 
