@@ -18,17 +18,17 @@ with jax.default_device(cpu_device):
         auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
         auto_model.params = param['params']
         
-        auto_model.save_pretrained('./gemma-interm-hf', max_shard_size='999GB')
+        auto_model.save_pretrained('/root/gemma-interm-hf', max_shard_size='999GB')
 
 # HF Flax --> HF SafeTensors
 import torch
 from transformers import GemmaForCausalLM
 
-hf_model = GemmaForCausalLM.from_pretrained('./gemma-interm-hf/', 
+hf_model = GemmaForCausalLM.from_pretrained('/root/gemma-interm-hf', 
                                             from_flax=True)
 hf_model.to(torch.bfloat16)
 hf_model.config.torch_dtype = torch.bfloat16
-hf_model.save_pretrained('./gemma-interm-hf', max_shard_size='4GB')
+hf_model.save_pretrained('/root/gemma-interm-hf', max_shard_size='4GB')
 
 from transformers import AutoTokenizer
 
