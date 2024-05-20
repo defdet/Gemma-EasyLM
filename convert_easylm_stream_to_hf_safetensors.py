@@ -8,7 +8,7 @@ from EasyLM.checkpoint import StreamingCheckpointer
 from EasyLM.jax_utils import get_float_dtype_by_name, match_partition_rules, make_shard_and_gather_fns, tree_apply, next_rng
 from transformers import FlaxGemmaForCausalLM
 import jax.numpy as jnp
-import torch
+import torch, jax
 cpu_device = jax.devices('cpu')[0]
 with jax.default_device(cpu_device):
         _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
