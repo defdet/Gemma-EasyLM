@@ -165,7 +165,7 @@ class HuggingfaceDataset(object):
         ds_culturax_eng = load_dataset("uonlp/CulturaX", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
         ds_culturax_ru = load_dataset("uonlp/CulturaX", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
         wiki = load_dataset("wikimedia/wikipedia", '20231101.ru', split='train', streaming=True, use_auth_token=True)
-        ds = datasets.interleave_datasets([ds_culturax_eng, ds_culturax_ru, wiki], probabilities=[0.33222591362, 0.66445182724, 0.00332225913])
+        ds = datasets.interleave_datasets([ds_culturax_eng, ds_culturax_ru, wiki], probabilities=[0.53222591362, 0.46445182724, 0.00332225913])
         self._dataset = ds
 
     def __iter__(self):
