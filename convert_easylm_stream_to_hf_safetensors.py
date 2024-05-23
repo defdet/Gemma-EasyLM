@@ -13,7 +13,7 @@ cpu_device = jax.devices('cpu')[0]
 with jax.default_device(cpu_device):
         _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
         
-        gemma_config = GemmaConfig.from_pretrained("google/gemma-7b")
+        gemma_config = GemmaConfig.from_pretrained("google/gemma-2b")
         
         auto_model = FlaxGemmaForCausalLM(config=gemma_config, dtype=jnp.bfloat16) # HF Gemma
         auto_model.params = param['params']
