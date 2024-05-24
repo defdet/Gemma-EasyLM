@@ -1,6 +1,6 @@
 from sys import argv
 
-ckpt_path = '/kaggle/input/gemma-7b-300k-steps/gemma-7B-300k'
+ckpt_path = '/kaggle/input/gemma-ru-200k/gemma-200k'
 print("Using ckpt:", ckpt_path)
 
 from EasyLM.models.gemma.gemma_model import GemmaConfig, FlaxGemmaForCausalLMModule
