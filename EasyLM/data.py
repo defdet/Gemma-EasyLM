@@ -162,9 +162,9 @@ class HuggingfaceDataset(object):
         split = self.config.split if self.config.split != '' else None
         self._tokenizer = tokenizer
         self._text_processor = text_processor
-        ds_culturax_eng = load_dataset("oscar-corpus/OSCAR-2301", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
-        ds_culturax_ru = load_dataset("oscar-corpus/OSCAR-2301", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(["timestamp", "url", "source"])
-        wiki = load_dataset("wikimedia/wikipedia", '20231101.ru', split='train', streaming=True, use_auth_token=True)
+        ds_culturax_eng = load_dataset("oscar-corpus/OSCAR-2301", "en", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(['id', 'meta'])
+        ds_culturax_ru = load_dataset("oscar-corpus/OSCAR-2301", "ru", split='train', cache_dir='../gemma_modeling/datasets',  use_auth_token=True, streaming=True).remove_columns(['id', 'meta'])
+        wiki = load_dataset("wikimedia/wikipedia", '20231101.ru', split='train', streaming=True, use_auth_token=True).remove_columns(['id', 'url', 'title'])
         ds = datasets.interleave_datasets([ds_culturax_eng, ds_culturax_ru, wiki], probabilities=[0.43222591362, 0.56445182724, 0.00332225913])
         self._dataset = ds
 
