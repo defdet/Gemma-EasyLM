@@ -11,7 +11,7 @@ import jax.numpy as jnp
 import torch, jax
 cpu_device = jax.devices('cpu')[0]
 with jax.default_device(cpu_device):
-        _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'params::{ckpt_path}')
+        _, param = StreamingCheckpointer.load_trainstate_checkpoint(load_from=f'trainstate::{ckpt_path}')
         
         gemma_config = GemmaConfig.from_pretrained("google/gemma-2b")
         
